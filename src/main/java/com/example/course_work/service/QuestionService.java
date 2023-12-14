@@ -1,6 +1,6 @@
-package com.example.courseWork.service;
+package com.example.course_work.service;
 
-import com.example.courseWork.Question;
+import com.example.course_work.Question;
 
 import java.util.Collection;
 

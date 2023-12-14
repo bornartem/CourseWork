@@ -1,10 +1,8 @@
-package com.example.courseWork;
+package com.example.course_work;
 
-import com.example.courseWork.exception.QuestionIndexOutOfBoundException;
-import com.example.courseWork.service.ExaminerService;
-import com.example.courseWork.service.QuestionService;
-import com.example.courseWork.serviceImpl.ExaminerServiceImpl;
-import org.junit.jupiter.api.Assertions;
+import com.example.course_work.exception.QuestionIndexOutOfBoundException;
+import com.example.course_work.service.QuestionService;
+import com.example.course_work.serviceImpl.ExaminerServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,15 +29,16 @@ public class ExaminerServiceImplTest {
             new Question("Whose chopper?", "It's Zed")
     ));
 
-//    @Test
-//    public void shouldReturnQuestionsList() {
-//        when(questionServiceMock.getAll())
-//                .thenReturn(questions);
-//        Collection<Question> result = out.getQuestions(2);
-//        assertNotEquals(questions, result);
-//    }
     @Test
-    public void shouldReturnThrowQuestionIndexOutOfBoundException(){
+    public void shouldReturnQuestionsList() {
+        when(questionServiceMock.getAll())
+                .thenReturn(questions);
+        Collection<Question> result = out.getQuestions(2);
+        assertTrue(result.size() == 2);
+    }
+
+    @Test
+    public void shouldReturnThrowQuestionIndexOutOfBoundException() {
         when(questionServiceMock.getAll())
                 .thenReturn(questions);
         assertThrows(QuestionIndexOutOfBoundException.class,

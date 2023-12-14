@@ -1,4 +1,4 @@
-package com.example.courseWork;
+package com.example.course_work;
 
 import java.util.Objects;
 

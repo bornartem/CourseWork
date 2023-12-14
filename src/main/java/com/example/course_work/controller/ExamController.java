@@ -1,7 +1,7 @@
-package com.example.courseWork.controller;
+package com.example.course_work.controller;
 
-import com.example.courseWork.Question;
-import com.example.courseWork.service.ExaminerService;
+import com.example.course_work.Question;
+import com.example.course_work.service.ExaminerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;

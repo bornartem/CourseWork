@@ -1,9 +1,7 @@
-package com.example.courseWork;
+package com.example.course_work;
 
-import com.example.courseWork.exception.QuestionAddedException;
-import com.example.courseWork.exception.QuestionNotFound;
-import com.example.courseWork.serviceImpl.JavaQuestionService;
-import org.junit.jupiter.api.Assertions;
+import com.example.course_work.exception.QuestionAddedException;
+import com.example.course_work.serviceImpl.JavaQuestionService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -24,9 +22,10 @@ public class JavaQuestionServiceTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenAddedSameQuestion(){
+    public void shouldThrowExceptionWhenAddedSameQuestion() {
+        out.addQuestion(question.getQuestion(), question.getAnswer());
         assertThrows(QuestionAddedException.class,
-                ()-> out.addQuestion(question.getQuestion(), question.getAnswer()));
+                () -> out.addQuestion(question.getQuestion(), question.getAnswer()));
     }
 
     @Test
@@ -36,18 +35,20 @@ public class JavaQuestionServiceTest {
         assertTrue(out.getAll().contains(result));
         assertEquals(question, result);
     }
+
     @Test
-    public void shouldRemoveQAToSet(){
+    public void shouldRemoveQAToSet() {
         Question result = out.addQuestion(question.getQuestion(), question.getAnswer());
         out.removeQuestion(question.getQuestion(), question.getAnswer());
         assertFalse(out.getAll().contains(result));
         assertEquals(question, result);
     }
+
     @Test
-    public void shouldReturnQAList(){
-       out.addQuestion(question.getQuestion(), question.getAnswer());
-       out.addQuestion(question1.getQuestion(), question1.getAnswer());
-       Collection<Question> result = out.getAll();
-       assertTrue(result.containsAll(List.of(question, question1)));
+    public void shouldReturnQAList() {
+        out.addQuestion(question.getQuestion(), question.getAnswer());
+        out.addQuestion(question1.getQuestion(), question1.getAnswer());
+        Collection<Question> result = out.getAll();
+        assertTrue(result.containsAll(List.of(question, question1)));
     }
 }

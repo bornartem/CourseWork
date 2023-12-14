@@ -1,8 +1,10 @@
 package com.example.course_work;
 
 import com.example.course_work.exception.QuestionAddedException;
+import com.example.course_work.repository.JavaQuestionRepository;
 import com.example.course_work.serviceImpl.JavaQuestionService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.util.Collection;
 import java.util.List;
@@ -10,7 +12,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JavaQuestionServiceTest {
-    private final JavaQuestionService out = new JavaQuestionService();
+
+    private final JavaQuestionRepository  out = new JavaQuestionRepository();
+//    private final JavaQuestionService out = new JavaQuestionService(javaQuestionRepository);
     Question question = new Question("What's the motorcycle?", "It's the chopper");
     Question question1 = new Question("Whose chopper?", "It's Zed");
 

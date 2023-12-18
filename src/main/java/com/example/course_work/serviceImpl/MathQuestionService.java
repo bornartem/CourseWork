@@ -1,64 +1,49 @@
 package com.example.course_work.serviceImpl;
 
 import com.example.course_work.Question;
-import com.example.course_work.exception.MathAddedException;
-import com.example.course_work.exception.MathNotFound;
+import com.example.course_work.repository.MathQuestionRepository;
 import com.example.course_work.service.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@Qualifier("mathQuestionService")
 public class MathQuestionService implements QuestionService {
+    Random random = new Random();
+    private final MathQuestionRepository mathQuestionRepository;
 
-    private final Set<Question> questions = new HashSet<>(List.of(
-            new Question("2+2", "4"),
-            new Question("10-5", "5"),
-            new Question("4*4", "16"),
-            new Question("100/5", "20"),
-            new Question("7+3-5", "5"),
-            new Question("10-10", "0")
+    @Autowired
+    public MathQuestionService(MathQuestionRepository mathQuestionRepository) {
+        this.mathQuestionRepository = mathQuestionRepository;
+    }
 
-    ));
 
     @Override
     public Question addQuestion(String question, String answer) {
-        Question math = new Question(question, answer);
-        if (questions.contains(math) || math == null) {
-            throw new MathAddedException();
-        }
-        questions.add(math);
-        return math;
+        return mathQuestionRepository.addQuestion(question, answer);
     }
 
     @Override
     public Question findQuestion(String question, String answer) {
-        Question math = new Question(question, answer);
-        if (questions.contains(math)) {
-            return math;
-        }
-        throw new MathNotFound();
+        return mathQuestionRepository.findQuestion(question, answer);
     }
 
     @Override
     public Question removeQuestion(String question, String answer) {
-        Question math = new Question(question, answer);
-        if (questions.contains(math)) {
-            questions.remove(math);
-            return math;
-        }
-        throw new MathNotFound();
+        return mathQuestionRepository.removeQuestion(question, answer);
     }
 
     @Override
-    public Collection<Question> getAll() {
-        return questions;
+    public Set<Question> getAll() {
+        return mathQuestionRepository.getAll();
     }
 
     @Override
     public Question getRandomQuestion() {
-        List<Question> mathList = questions.stream().toList();
-        Random random = new Random();
+        List<Question> mathList = mathQuestionRepository.getAll().stream().toList();
         int randomMath = random.nextInt(mathList.size());
         return mathList.get(randomMath);
     }

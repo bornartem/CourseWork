@@ -1,7 +1,8 @@
 package com.example.course_work.controller;
 
 import com.example.course_work.Question;
-import com.example.course_work.service.QuestionService;
+import com.example.course_work.repository.JavaQuestionRepository;
+import com.example.course_work.repository.MathQuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,31 +16,31 @@ import java.util.Collection;
 @RequestMapping("/exam/java")
 public class JavaQuestionController {
 
-    private final QuestionService questionService;
+    private final JavaQuestionRepository javaQuestionRepository;
 
     @Autowired
-    public JavaQuestionController(@Qualifier("javaQuestionService")QuestionService questionService) {
-        this.questionService = questionService;
+    public JavaQuestionController(JavaQuestionRepository javaQuestionRepository) {
+        this.javaQuestionRepository = javaQuestionRepository;
     }
 
     @GetMapping("/add")
     public Question add(@RequestParam("question") String question, String answer) {
-        return questionService.addQuestion(question, answer);
+        return javaQuestionRepository.addQuestion(question, answer);
     }
 
     @GetMapping("/remove")
     public Question remove(@RequestParam("question") String question, String answer) {
-        return questionService.removeQuestion(question, answer);
+        return javaQuestionRepository.removeQuestion(question, answer);
     }
 
     @GetMapping("/find")
     public Question find(@RequestParam("question") String question, String answer) {
-        return questionService.findQuestion(question, answer);
+        return javaQuestionRepository.findQuestion(question, answer);
     }
 
     @GetMapping
     public Collection<Question> getAll() {
-        return questionService.getAll();
+        return javaQuestionRepository.getAll();
     }
 
 }

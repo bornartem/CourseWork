@@ -4,12 +4,16 @@ import com.example.course_work.Question;
 import com.example.course_work.exception.QuestionAddedException;
 import com.example.course_work.exception.QuestionNotFound;
 import com.example.course_work.service.QuestionRepository;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
 @Repository
+@Qualifier("javaQuestionRepository")
 public class JavaQuestionRepository implements QuestionRepository {
     private final Set<Question> questions = new HashSet<>(Set.of(
             new Question("What kind types of variables in Java?", "Primitives and references"),
@@ -19,6 +23,10 @@ public class JavaQuestionRepository implements QuestionRepository {
             new Question("What kind types of memory in Java?", "Stack, Heap"),
             new Question("Test1", "Test2")
     ));
+
+    @PostConstruct
+    public void init() {
+    }
 
     @Override
     public Question addQuestion(String question, String answer) {
@@ -49,7 +57,7 @@ public class JavaQuestionRepository implements QuestionRepository {
     }
 
     @Override
-    public Collection<Question> getAll() {
+    public Set<Question> getAll() {
         return questions;
     }
 }

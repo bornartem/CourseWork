@@ -3,6 +3,7 @@ package com.example.course_work.service;
 import com.example.course_work.Question;
 
 import java.util.Collection;
+import java.util.Set;
 
 public interface QuestionRepository {
     Question addQuestion(String question, String answer);
@@ -11,5 +12,5 @@ public interface QuestionRepository {
 
     Question removeQuestion(String question, String answer);
 
-    Collection<Question> getAll();
+    Set<Question> getAll();
 }

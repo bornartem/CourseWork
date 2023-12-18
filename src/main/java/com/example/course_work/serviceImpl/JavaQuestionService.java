@@ -37,7 +37,7 @@ public class JavaQuestionService implements QuestionService {
     }
 
     @Override
-    public Collection<Question> getAll() {
+    public Set<Question> getAll() {
         return javaQuestionRepository.getAll();
     }
 

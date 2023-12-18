@@ -13,20 +13,25 @@ import java.util.Set;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    private final QuestionService questionService;
+    private final QuestionService javaQuestionService;
+    private final QuestionService mathQuestionService;
 
-    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService questionService) {
-        this.questionService = questionService;
+
+    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
+                               @Qualifier("mathQuestionService") QuestionService mathQuestionService) {
+        this.javaQuestionService = javaQuestionService;
+        this.mathQuestionService = mathQuestionService;
     }
 
     @Override
-    public Collection<Question> getQuestions(int amount) {
-        if (amount > questionService.getAll().size()) {
+    public Set<Question> getQuestions(int amount) {
+        if (amount > javaQuestionService.getAll().size() + mathQuestionService.getAll().size()) {
             throw new QuestionIndexOutOfBoundException();
         }
         Set<Question> newQuestions = new HashSet<>();
         while (newQuestions.size() != amount) {
-            newQuestions.add(questionService.getRandomQuestion());
+            newQuestions.add(javaQuestionService.getRandomQuestion());
+            newQuestions.add(mathQuestionService.getRandomQuestion());
         }
         return newQuestions;
     }

@@ -14,11 +14,10 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/exam/math")
 public class MathQuestionController {
-    @Qualifier("mathQuestionService")
     private final QuestionService mathQuestionService;
 
     @Autowired
-    public MathQuestionController(QuestionService mathQuestionService) {
+    public MathQuestionController(@Qualifier("mathQuestionService") QuestionService mathQuestionService) {
         this.mathQuestionService = mathQuestionService;
     }
 

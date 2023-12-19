@@ -11,18 +11,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ExaminerServiceImplTest {
-    @Mock
+    @Mock(name = "javaQuestionService")
     private QuestionService javaQuestionServiceMock;
-    @Mock
+    @Mock(name = "mathQuestionService")
     private QuestionService mathQuestionServiceMock;
     @InjectMocks
     private ExaminerServiceImpl examinerService;
@@ -43,18 +41,20 @@ public class ExaminerServiceImplTest {
         when(mathQuestionServiceMock.getAll())
                 .thenReturn(questions1);
         when(javaQuestionServiceMock.getRandomQuestion())
-                .thenReturn(new Question("Who","I am"));
+                .thenReturn(new Question("1", "222333"))
+                .thenReturn(new Question("2", "21333"));
         when(mathQuestionServiceMock.getRandomQuestion())
-                .thenReturn(new Question("1","222333"));
-        Set<Question> result = examinerService.getQuestions(2);
-        assertEquals(result.size(), 2);
+                .thenReturn(new Question("234", "2223546578333"))
+                .thenReturn(new Question("12", "1214445"));
+        Collection<Question> result = examinerService.getQuestions(4);
+        assertEquals(result.size(), 4);
     }
 
-//    @Test
-//    public void shouldReturnThrowQuestionIndexOutOfBoundException() {
-//        when(questionServiceMock.getAll())
-//                .thenReturn(questions);
-//        assertThrows(QuestionIndexOutOfBoundException.class,
-//                () -> examinerService.getQuestions(3));
-//    }
+    @Test
+    public void shouldReturnThrowQuestionIndexOutOfBoundException() {
+        assertThrows(QuestionIndexOutOfBoundException.class,
+                () -> examinerService.getQuestions(5));
+        assertThrows(QuestionIndexOutOfBoundException.class,
+                () -> examinerService.getQuestions(5));
+    }
 }

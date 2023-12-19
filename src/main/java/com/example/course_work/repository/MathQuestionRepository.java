@@ -12,20 +12,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Repository
-@Qualifier("mathQuestionRepository")
 public class MathQuestionRepository implements QuestionRepository {
-    private final Set<Question> questions = new HashSet<>(Set.of(
-            new Question("2+2", "4"),
-            new Question("10-5", "5"),
-            new Question("4*4", "16"),
-            new Question("100/5", "20"),
-            new Question("7+3-5", "5"),
-            new Question("10-10", "0")
-    ));
+    private Set<Question> questions;
 
     @PostConstruct
     public void init() {
-
+        questions = new HashSet<>(Set.of(
+                new Question("2+2", "4"),
+                new Question("10-5", "5"),
+                new Question("4*4", "16"),
+                new Question("100/5", "20"),
+                new Question("7+3-5", "5"),
+                new Question("10-10", "0")
+        ));
     }
 
     @Override

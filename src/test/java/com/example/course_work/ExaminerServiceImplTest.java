@@ -3,6 +3,7 @@ package com.example.course_work;
 import com.example.course_work.exception.QuestionIndexOutOfBoundException;
 import com.example.course_work.service.QuestionService;
 import com.example.course_work.serviceImpl.ExaminerServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,16 +15,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ExaminerServiceImplTest {
-    @Mock(name = "javaQuestionService")
     private QuestionService javaQuestionServiceMock;
-    @Mock(name = "mathQuestionService")
     private QuestionService mathQuestionServiceMock;
-    @InjectMocks
     private ExaminerServiceImpl examinerService;
+    @BeforeEach
+    public void setup(){
+        javaQuestionServiceMock = mock(QuestionService.class);
+        mathQuestionServiceMock = mock(QuestionService.class);
+        examinerService = new ExaminerServiceImpl(javaQuestionServiceMock, mathQuestionServiceMock);
+
+    }
 
     private final Set<Question> questions = new HashSet<>(Set.of(
             new Question("What's the motorcycle?", "It's the chopper"),

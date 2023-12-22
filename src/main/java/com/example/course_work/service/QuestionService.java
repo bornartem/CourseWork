@@ -13,5 +13,5 @@ public interface QuestionService {
 
     Set<Question> getAll();
 
-    Object getRandomQuestion();
+    Question getRandomQuestion();
 }

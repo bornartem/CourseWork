@@ -20,11 +20,11 @@ public class JavaQuestionRepository implements QuestionRepository {
     public void init() {
         questions = new HashSet<>();
         questions.add(new Question("What kind types of variables in Java?", "Primitives and references"));
-                questions.add(new Question("What kind types of collections in Java?", "List, Set, Map"));
-//                new Question("What class is grand pa of all classes in Java?", "Object"),
-//                new Question("What kind types of OOP do you know?", "Polymorphism, Inheritance, Encapsulation"),
-//                new Question("What kind types of memory in Java?", "Stack, Heap"),
-//                new Question("Test1", "Test2")
+        questions.add(new Question("What kind types of collections in Java?", "List, Set, Map"));
+        questions.add(new Question("What class is grand pa of all classes in Java?", "Object"));
+        questions.add(new Question("What kind types of OOP do you know?", "Polymorphism, Inheritance, Encapsulation"));
+        questions.add(new Question("What kind types of memory in Java?", "Stack, Heap"));
+        questions.add(new Question("Test1", "Test2"));
     }
 
     @Override

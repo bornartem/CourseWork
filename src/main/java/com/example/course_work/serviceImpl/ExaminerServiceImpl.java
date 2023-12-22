@@ -4,29 +4,29 @@ import com.example.course_work.Question;
 import com.example.course_work.exception.QuestionIndexOutOfBoundException;
 import com.example.course_work.service.ExaminerService;
 import com.example.course_work.service.QuestionService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    Random random = new Random();
+    private Random random = new Random();
 
     private List<QuestionService> questionList;
+    public List<QuestionService> getAll(){
+        return questionList;
+    }
 
     public ExaminerServiceImpl(List<QuestionService> questionList) {
         this.questionList = questionList;
     }
 
     @Override
-    public List<Question> getQuestions(int amount) {
-        if (amount > questionList.size()) {
-            throw new QuestionIndexOutOfBoundException();
+    public Set<Question> getQuestions(int amount) {
+        Set<Question> newQuestions = new HashSet<>();
+        while (newQuestions.size() != amount) {
+            newQuestions.add(questionList.get(random.nextInt(questionList.size())).getRandomQuestion());
         }
-        while (questionList.size() != amount) {
-            questionList.get(random.nextInt(questionList.size())).getRandomQuestion();
-        }
-        return questionList;
+        return newQuestions;
     }
 }

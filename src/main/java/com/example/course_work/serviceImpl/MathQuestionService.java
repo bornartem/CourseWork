@@ -5,7 +5,6 @@ import com.example.course_work.exception.MathAddedException;
 import com.example.course_work.exception.MathNotFound;
 //import com.example.course_work.repository.MathQuestionRepository;
 import com.example.course_work.service.QuestionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.*;
 @Service
 @Qualifier("mathQuestionService")
 public class MathQuestionService implements QuestionService {
-    Random random = new Random();
+    private Random random = new Random();
 //    private final MathQuestionRepository mathQuestionRepository;
 
 //    @Autowired
@@ -48,10 +47,10 @@ public class MathQuestionService implements QuestionService {
     public Question getRandomQuestion() {
         int value1 = random.nextInt(1, 10);
         int value2 = random.nextInt(1, 10);
-        List<String> operations = List.of("+", "-", "*", "/");
+        List<String> operations = List.of("+");
         int index = random.nextInt(0, operations.size());
         String randomOperation = operations.get(index);
-        switch (randomOperation) {
+           switch (randomOperation) {
             case "+" -> {
                 String questionPlus = "Сколько будет " + value1 + "+" + value2;
                 String resultPlus = String.valueOf(value1 + value2);
@@ -73,6 +72,7 @@ public class MathQuestionService implements QuestionService {
                 return new Question(questionDivide, resultDivide);
             }
         }
-        return new Question(getRandomQuestion().getQuestion(), getRandomQuestion().getAnswer());
+        return null;
     }
 }
+

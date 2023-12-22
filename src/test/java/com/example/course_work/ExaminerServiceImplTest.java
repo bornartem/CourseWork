@@ -46,7 +46,7 @@ public class ExaminerServiceImplTest {
         when(mathQuestionServiceMock.getAll()).thenReturn(questions1);
         when(javaQuestionServiceMock.getRandomQuestion()).thenReturn(new Question("1", "222333")).thenReturn(new Question("2", "21333"));
         when(mathQuestionServiceMock.getRandomQuestion()).thenReturn(new Question("234", "2223546578333")).thenReturn(new Question("12", "1214445"));
-        Collection<Question> result = examinerService.getQuestions(4);
+        Collection<QuestionService> result = examinerService.getQuestions(4);
         assertEquals(result.size(), 4);
     }
 

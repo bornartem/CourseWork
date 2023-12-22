@@ -1,4 +1,4 @@
-package com.example.courseWork;
+package com.example.course_work;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

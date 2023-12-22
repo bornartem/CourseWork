@@ -7,32 +7,26 @@ import com.example.course_work.service.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
-    private final QuestionService javaQuestionService;
-    private final QuestionService mathQuestionService;
+    Random random = new Random();
 
+    private List<QuestionService> questionList;
 
-    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
-                               @Qualifier("mathQuestionService") QuestionService mathQuestionService) {
-        this.javaQuestionService = javaQuestionService;
-        this.mathQuestionService = mathQuestionService;
+    public ExaminerServiceImpl(List<QuestionService> questionList) {
+        this.questionList = questionList;
     }
 
     @Override
-    public Set<Question> getQuestions(int amount) {
-        if (amount > javaQuestionService.getAll().size() + mathQuestionService.getAll().size()) {
+    public List<Question> getQuestions(int amount) {
+        if (amount > questionList.size()) {
             throw new QuestionIndexOutOfBoundException();
         }
-        Set<Question> newQuestions = new HashSet<>();
-        while (newQuestions.size() != amount) {
-            newQuestions.add(javaQuestionService.getRandomQuestion());
-            newQuestions.add(mathQuestionService.getRandomQuestion());
+        while (questionList.size() != amount) {
+            questionList.get(random.nextInt(questionList.size())).getRandomQuestion();
         }
-        return newQuestions;
+        return questionList;
     }
 }

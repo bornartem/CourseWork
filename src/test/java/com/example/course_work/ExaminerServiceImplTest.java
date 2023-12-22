@@ -6,8 +6,6 @@ import com.example.course_work.serviceImpl.ExaminerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collection;
@@ -23,8 +21,9 @@ public class ExaminerServiceImplTest {
     private QuestionService javaQuestionServiceMock;
     private QuestionService mathQuestionServiceMock;
     private ExaminerServiceImpl examinerService;
+
     @BeforeEach
-    public void setup(){
+    public void setup() {
         javaQuestionServiceMock = mock(QuestionService.class);
         mathQuestionServiceMock = mock(QuestionService.class);
         examinerService = new ExaminerServiceImpl(javaQuestionServiceMock, mathQuestionServiceMock);
@@ -42,16 +41,11 @@ public class ExaminerServiceImplTest {
 
     @Test
     public void shouldReturnQuestionsList() {
-        when(javaQuestionServiceMock.getAll())
-                .thenReturn(questions);
-        when(mathQuestionServiceMock.getAll())
-                .thenReturn(questions1);
-        when(javaQuestionServiceMock.getRandomQuestion())
-                .thenReturn(new Question("1", "222333"))
-                .thenReturn(new Question("2", "21333"));
-        when(mathQuestionServiceMock.getRandomQuestion())
-                .thenReturn(new Question("234", "2223546578333"))
-                .thenReturn(new Question("12", "1214445"));
+        Set<Question> javaQuestionServiceAll = javaQuestionServiceMock.getAll();
+        when(javaQuestionServiceAll).thenReturn(questions);
+        when(mathQuestionServiceMock.getAll()).thenReturn(questions1);
+        when(javaQuestionServiceMock.getRandomQuestion()).thenReturn(new Question("1", "222333")).thenReturn(new Question("2", "21333"));
+        when(mathQuestionServiceMock.getRandomQuestion()).thenReturn(new Question("234", "2223546578333")).thenReturn(new Question("12", "1214445"));
         Collection<Question> result = examinerService.getQuestions(4);
         assertEquals(result.size(), 4);
     }

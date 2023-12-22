@@ -18,13 +18,13 @@ public class JavaQuestionRepository implements QuestionRepository {
 
     @PostConstruct
     public void init() {
-        questions = new HashSet<>(Set.of(
-                new Question("What kind types of variables in Java?", "Primitives and references"),
-                new Question("What kind types of collections in Java?", "List, Set, Map"),
-                new Question("What class is grand pa of all classes in Java?", "Object"),
-                new Question("What kind types of OOP do you know?", "Polymorphism, Inheritance, Encapsulation"),
-                new Question("What kind types of memory in Java?", "Stack, Heap"),
-                new Question("Test1", "Test2")));
+        questions = new HashSet<>();
+        questions.add(new Question("What kind types of variables in Java?", "Primitives and references"));
+                questions.add(new Question("What kind types of collections in Java?", "List, Set, Map"));
+//                new Question("What class is grand pa of all classes in Java?", "Object"),
+//                new Question("What kind types of OOP do you know?", "Polymorphism, Inheritance, Encapsulation"),
+//                new Question("What kind types of memory in Java?", "Stack, Heap"),
+//                new Question("Test1", "Test2")
     }
 
     @Override

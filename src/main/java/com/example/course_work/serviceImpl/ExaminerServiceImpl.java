@@ -1,7 +1,6 @@
 package com.example.course_work.serviceImpl;
 
 import com.example.course_work.Question;
-import com.example.course_work.exception.QuestionIndexOutOfBoundException;
 import com.example.course_work.service.ExaminerService;
 import com.example.course_work.service.QuestionService;
 import org.springframework.stereotype.Service;
@@ -13,9 +12,6 @@ public class ExaminerServiceImpl implements ExaminerService {
     private Random random = new Random();
 
     private List<QuestionService> questionList;
-    public List<QuestionService> getAll(){
-        return questionList;
-    }
 
     public ExaminerServiceImpl(List<QuestionService> questionList) {
         this.questionList = questionList;
